@@ -1,1 +1,1 @@
-include ':app', ':androidsetup'
+include ':androidsetup'
