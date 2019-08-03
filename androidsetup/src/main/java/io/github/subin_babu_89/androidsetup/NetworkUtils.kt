@@ -11,11 +11,9 @@ import java.util.concurrent.TimeUnit
  * @author sbabu
  */
 
-
-val okHttpClient = OkHttpClient.Builder().cache(null)
-    .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message ->
-        Timber.d(
-            "okhttp client intercept : %s",
-            message
-        )
+val okHttpClient : OkHttpClient = OkHttpClient.Builder().cache(null)
+    .addInterceptor(HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+        override fun log(message: String) {
+            Timber.d("OkHttp logging intercept : %s",message)
+        }
     })).connectTimeout(20L, TimeUnit.SECONDS).readTimeout(20L, TimeUnit.SECONDS).build()
